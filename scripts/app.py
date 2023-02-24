@@ -92,6 +92,7 @@ class Script(scripts.Script):
     def run(self, p, only_save_background_free_pictures):
         if only_save_background_free_pictures:      
             p.do_not_save_samples = True
+            p.do_not_save_grid = True
         # Make a process_images Object
         proc = process_images(p)
         # Go through all the images
@@ -103,12 +104,12 @@ class Script(scripts.Script):
             if not only_save_background_free_pictures:      
                 mask = im.fromarray(nmask)
                 # Save the new images
-                images.save_image(mask, p.outpath_samples, "mask_",proc.seed + i, proc.prompt, "png", info=proc.info, p=p)
-                images.save_image(img, p.outpath_samples, "img_",proc.seed + i, proc.prompt, "png", info=proc.info, p=p)
+                #images.save_image(mask, p.outpath_samples, "mask_",proc.seed + i, proc.prompt, "png", info=proc.info, p=p)
+                #images.save_image(img, p.outpath_samples, "img_",proc.seed + i, proc.prompt, "png", info=proc.info, p=p)
                 # Add the images to the proc object
                 proc.images.append(mask)
                 proc.images.append(img)
             else:
                 proc.images[i] = img
-                images.save_image(img, p.outpath_samples, "",proc.seed, proc.prompt, "png", info=proc.info, p=p)
+                #images.save_image(img, p.outpath_samples, "",proc.seed, proc.prompt, "png", info=proc.info, p=p)
         return proc
